@@ -246,4 +246,22 @@ func (l *InfoList) PID2FilesChan() chan *PID2Files {
 	return lc
 }
 
+// Close reset resource of the list
+func (l *InfoList) Close() {
+	for key, _ := range l.files {
+		delete(l.files, key)
+	}
+	for key, _ := range l.pids {
+		delete(l.pids, key)
+	}
+	select {
+	case <-l.readDone:
+		//it already closed
+	default:
+		close(l.readDone)
+	}
+	l = nil
+	return
+}
+
 //

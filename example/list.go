@@ -23,6 +23,7 @@ func main() {
 	for key, val := range list.File2PIDsMap() {
 		fmt.Printf("%s(%s): %v\n", key, val.File, val.PIDs)
 	}
+	list.Close()
 	fmt.Printf(" -----\n")
 	list, err = lsof.LsofPID(os.Getppid(), "")
 	if err != nil {
@@ -33,6 +34,7 @@ func main() {
 	for key, val := range list.File2PIDsMap() {
 		fmt.Printf("%s(%s): %v\n", key, val.File, val.PIDs)
 	}
+	list.Close()
 	fmt.Printf(" -----\n")
 	list, err = lsof.LsofPID(os.Getpid(), "")
 	if err != nil {
@@ -43,5 +45,6 @@ func main() {
 	for key, val := range list.File2PIDsMap() {
 		fmt.Printf("%s(%s): %v\n", key, val.File, val.PIDs)
 	}
+	list.Close()
 	fmt.Printf(" -----\n")
 }
