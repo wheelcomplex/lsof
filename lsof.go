@@ -216,7 +216,7 @@ func (l *InfoList) File2PIDsMap() map[string]*File2PIDs {
 }
 
 // File2PIDsChan return file list in chan
-func (l *InfoList) File2PIDsChan() chan *File2PIDs {
+func (l *InfoList) File2PIDsChan() <-chan *File2PIDs {
 	// block until read done
 	//fmt.Printf("File2PIDsChan: waiting for read ...\n")
 	<-l.readDone
@@ -236,7 +236,7 @@ func (l *InfoList) PID2FilesMap() map[int]*PID2Files {
 }
 
 // PID2FilesChan return file list in chan
-func (l *InfoList) PID2FilesChan() chan *PID2Files {
+func (l *InfoList) PID2FilesChan() <-chan *PID2Files {
 	// block until read done
 	//fmt.Printf("PID2FilesChan: waiting for read ...\n")
 	<-l.readDone
