@@ -22,7 +22,7 @@ func Scan(chkFn StringChecker) (map[string][]int, error) {
 
 	var results = map[string][]int{}
 
-	if len(pidList) < ChunkSize {
+	if NumWorkers < 2 || len(pidList) < ChunkSize {
 		tryReadFdDir(pidList, chkFn, results, nil)
 
 	} else {
