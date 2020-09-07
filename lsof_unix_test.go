@@ -21,6 +21,20 @@ func BenchmarkScan(b *testing.B) {
 func TestScan(t *testing.T) {
 	var pidFile = newFile(t)
 
+	t.Run("Multithread", func(t *testing.T) {
+		t.Log("NumWorkers =", NumWorkers)
+		testScan(t, pidFile)
+	})
+
+	t.Run("Singlethread", func(t *testing.T) {
+		NumWorkers = 1
+
+		t.Log("NumWorkers =", NumWorkers)
+		testScan(t, pidFile)
+	})
+}
+
+func testScan(t *testing.T, pidFile string) {
 	p, err := Scan(func(path string) bool {
 		return pidFile == path
 	})

@@ -65,7 +65,7 @@ func tryReadFdDir(pidList []string, fn StringChecker, res map[string][]int, mu *
 	for _, pid := range pidList {
 		p, err := strconv.Atoi(pid)
 		if err != nil {
-			return
+			continue
 		}
 
 		readFdDir("/proc/"+pid+"/fd", p, fn, res, mu)
